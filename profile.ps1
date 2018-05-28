@@ -3,15 +3,11 @@ Write-Host 'Howdy!'
 New-Alias npp notepad++.lnk
 New-Alias pc 'C:\Users\10\Google Drive\Percent Complete 2017.xlsx'
 $hosts = 'C:\Windows\System32\drivers\etc\hosts'
-function cs {Set-Location 'C:\CS'}
-
-# LS.MSH 
+ 
 # Colorized LS function replacement 
-# /\/\o\/\/ 2006 
 # http://mow001.blogspot.com 
 # http://stackoverflow.com/questions/138144/what-s-in-your-powershell-profile-ps1-file
-function LL
-{
+function ll {
     param ($dir = ".", $all = $false) 
 
     $origFg = $host.ui.rawui.foregroundColor 
@@ -19,10 +15,8 @@ function LL
     if ( $all ) { $toList = ls -force $dir }
     else { $toList = ls $dir }
 
-    foreach ($Item in $toList)  
-    { 
-        Switch ($Item.Extension)  
-        { 
+    foreach ($Item in $toList) { 
+        Switch ($Item.Extension) { 
             ".Exe" {$host.ui.rawui.foregroundColor = "Yellow"} 
             ".cmd" {$host.ui.rawui.foregroundColor = "Red"} 
             ".msh" {$host.ui.rawui.foregroundColor = "Red"} 
@@ -35,14 +29,13 @@ function LL
     $host.ui.rawui.foregroundColor = $origFg 
 }
 
-function lla
-{
+function lla {
     param ( $dir=".")
     ll $dir $true
 }
 
+# Adds YouTube.com to the hosts file.
 Function Block-Youtube {
-
     $hosts = 'C:\Windows\System32\drivers\etc\hosts'
 
     $is_blocked = Get-Content -Path $hosts |
@@ -52,11 +45,10 @@ Function Block-Youtube {
        Add-Content -Path $hosts -Value "127.0.0.1 youtube.com"
 	   Add-Content -Path $hosts -Value "127.0.0.1 www.youtube.com"
     }
-
 }
 
+# Removes any lines from the hosts file containing Youtube.com
 Function Unblock-Youtube {
-
     $hosts = 'C:\Windows\System32\drivers\etc\hosts'
 
     $is_blocked = Get-Content -Path $hosts |
@@ -77,6 +69,7 @@ Function Launch-IOTA {
 	java -jar C:\Git\iri\target\iri-1.4.1.4.jar -p 14265
 }
 
-Function PrintColors {
+#Prints a line of each color to console.
+Function Print-Colors {
 	[System.ConsoleColor].GetEnumValues() | ForEach-Object { Write-Host $_ -ForegroundColor $_ }
 }
