@@ -72,13 +72,6 @@ Function Unblock-Youtube {
     }
 }
 
-# Launches Unblock-Youtube and runs chrome with habitica and youtube
-Function Youtube {
-	Unblock-Youtube
-	
-	chrome habitica.com youtube.com
-}
-
 # Starts the IOTA Full Node running on localhost:14625
 Function Launch-IOTA {
 	java -jar C:\Git\iri\target\iri-1.4.1.4.jar -p 14265
