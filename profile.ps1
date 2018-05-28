@@ -1,7 +1,7 @@
 Write-Host 'Howdy!'
 
 New-Alias npp notepad++.lnk
-New-Alias pc 'C:\Users\10\Google Drive\Percent Complete 2017.xlsx'
+New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx"
 $hosts = 'C:\Windows\System32\drivers\etc\hosts'
  
 # Colorized LS function replacement 
