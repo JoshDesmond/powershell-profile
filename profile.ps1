@@ -34,6 +34,25 @@ function lla {
     ll $dir $true
 }
 
+function la {ls -force}
+
+
+# Prints a line of each color to console.
+Function Print-Colors {
+	[System.ConsoleColor].GetEnumValues() | ForEach-Object { Write-Host $_ -ForegroundColor $_ }
+}
+
+# Prints the Sha1 hash of a string
+# http://jongurgul.com/blog/get-stringhash-get-filehash/ 
+Function Get-StringHash([String] $String, $HashName = "SHA1") 
+{ 
+	$StringBuilder = New-Object System.Text.StringBuilder 
+	[System.Security.Cryptography.HashAlgorithm]::Create($HashName).ComputeHash([System.Text.Encoding]::UTF8.GetBytes($String))|%{ 
+	[Void]$StringBuilder.Append($_.ToString("x2")) 
+} 
+$StringBuilder.ToString() 
+}
+
 # Adds YouTube.com to the hosts file.
 Function Block-Youtube {
     $hosts = 'C:\Windows\System32\drivers\etc\hosts'
@@ -64,12 +83,11 @@ Function Unblock-Youtube {
     }
 }
 
+#======================
+#=Me Specific Commands=
+#======================
+
 # Starts the IOTA Full Node running on localhost:14625
 Function Launch-IOTA {
 	java -jar C:\Git\iri\target\iri-1.4.1.4.jar -p 14265
-}
-
-#Prints a line of each color to console.
-Function Print-Colors {
-	[System.ConsoleColor].GetEnumValues() | ForEach-Object { Write-Host $_ -ForegroundColor $_ }
 }
