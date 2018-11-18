@@ -6,6 +6,7 @@ New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx"
 # Colorized LS function replacement 
 # http://mow001.blogspot.com 
 # http://stackoverflow.com/questions/138144/what-s-in-your-powershell-profile-ps1-file
+# Does not work on ubuntu bash
 function ll {
     param ($dir = ".", $all = $false) 
 
