@@ -82,6 +82,10 @@ Function Unblock-Youtube {
     }
 }
 
+# Sets the background color of the prompt to the default powershell blue
+Function Set-Colors {
+
+}
 #======================
 #=Me Specific Commands=
 #======================
