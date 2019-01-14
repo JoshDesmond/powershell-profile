@@ -1,4 +1,4 @@
-Write-Host 'Howdy!'
+Write-Host 'Hello!'
 
 New-Alias npp notepad++.lnk
 New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx"
