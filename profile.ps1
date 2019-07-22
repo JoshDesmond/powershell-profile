@@ -9,11 +9,12 @@ function Print-ProfileLog {
 #====== Aliases =======
 #======================
 Print-ProfileLog 'Configuring Aliases'
-New-Alias ppl Print-ProfileLog
-New-Alias which get-command
-New-Alias npp notepad++.lnk
-New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx"
-
+New-Alias ppl Print-ProfileLog -Force
+New-Alias which get-command -Force
+New-Alias npp notepad++.lnk -Force
+New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx" -Force
+Function Get-PowershellVersion { $PSVersionTable }
+New-Alias version Get-PowershellVersion -Force
 
 #======================
 #=== $Env Settings ====
@@ -39,6 +40,13 @@ $console.backgroundcolor = "black"
 #======================
 ppl 'Importing Posh-Git'
 Import-Module posh-git
+
+#======================
+#=== Import AWS-CLI ===
+#======================
+ppl 'Importing AWSPowerShell'
+Import-Module AWSPowerShell
+
 
 #======================
 #===== Functions ====== 
@@ -153,11 +161,14 @@ Function Launch-VM {
 	ssh -p2222 admin@127.0.0.1 -v
 }
 
+Function CentOSSH {
+	ssh -p2222 admin@127.0.0.1 -v
+}
 
 #======================
 #==== Finishing Up ====
 # Clear-Host
-Write-Host 'Hello!'
+Write-Host 'Configuration Complete. Hello!'
 
 # Notes and Favorited Commands:
 # Get-Command -Module PackageManagement # Prints available commands in the PackageManagement module
