@@ -11,10 +11,12 @@ function Print-ProfileLog {
 Print-ProfileLog 'Configuring Aliases'
 New-Alias ppl Print-ProfileLog -Force
 New-Alias which get-command -Force
-New-Alias npp notepad++.lnk -Force
+New-Alias npp OpenWith-NotepadPlusPlus -Force
 New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx" -Force
 Function Get-PowershellVersion { $PSVersionTable }
 New-Alias version Get-PowershellVersion -Force
+New-Alias vim nvim -Force
+New-Alias vi vim -Force
 
 #======================
 #=== $Env Settings ====
@@ -141,6 +143,12 @@ Function Unblock-Youtube {
     }
 }
 
+# OpenWith-NotepadPlusPlus
+# Opens a file with notepad++
+Function OpenWith-NotepadPlusPlus {
+    notepad++.lnk (Get-ChildItem $args[0])
+}
+
 #======================
 #=Me Specific Commands=
 #======================
@@ -173,3 +181,9 @@ Write-Host 'Configuration Complete. Hello!'
 # Notes and Favorited Commands:
 # Get-Command -Module PackageManagement # Prints available commands in the PackageManagement module
 # Get-Package -Provider Programs -IncludeWindowsInstaller # Shows everything installed
+
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
