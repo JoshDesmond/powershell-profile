@@ -186,8 +186,7 @@ Function CentOSSH {
 }
 
 # Adding an external script real quick.
-$fileContents = [string]::join([environment]::newline, (get-content -path C:\Shortcuts\lunatic.ps1))
-invoke-expression $fileContents
+get-content -path C:\Shortcuts\lunatic.ps1 -raw | invoke-expression
 
 #======================
 #==== Finishing Up ====
@@ -197,3 +196,4 @@ Write-Host 'Configuration Complete. Hello!'
 # Notes and Favorited Commands:
 # Get-Command -Module PackageManagement # Prints available commands in the PackageManagement module
 # Get-Package -Provider Programs -IncludeWindowsInstaller # Shows everything installed
+# Get-Content -path C:\CS\Powershell\script.ps1 -raw | invoke-expression # can add an external script
