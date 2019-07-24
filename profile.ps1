@@ -185,6 +185,10 @@ Function CentOSSH {
 	ssh -p2222 admin@127.0.0.1 -v
 }
 
+# Adding an external script real quick.
+$fileContents = [string]::join([environment]::newline, (get-content -path C:\Shortcuts\lunatic.ps1))
+invoke-expression $fileContents
+
 #======================
 #==== Finishing Up ====
 # Clear-Host
