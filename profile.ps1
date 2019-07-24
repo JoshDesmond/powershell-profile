@@ -49,6 +49,14 @@ Import-Module posh-git
 ppl 'Importing AWSPowerShell'
 Import-Module AWSPowerShell
 
+#======================
+#== Import Chocolatey =
+#======================
+ppl 'Importing Chocolatey'
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
 
 #======================
 #===== Functions ====== 
@@ -181,9 +189,3 @@ Write-Host 'Configuration Complete. Hello!'
 # Notes and Favorited Commands:
 # Get-Command -Module PackageManagement # Prints available commands in the PackageManagement module
 # Get-Package -Provider Programs -IncludeWindowsInstaller # Shows everything installed
-
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
