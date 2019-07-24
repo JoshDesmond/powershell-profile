@@ -157,6 +157,10 @@ Function OpenWith-NotepadPlusPlus {
     notepad++.lnk (Get-ChildItem $args[0])
 }
 
+Function Get-History-All {
+	cat (Get-PSReadlineOption).HistorySavePath
+}
+
 #======================
 #=Me Specific Commands=
 #======================
