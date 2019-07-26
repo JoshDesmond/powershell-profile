@@ -17,6 +17,7 @@ Function Get-PowershellVersion { $PSVersionTable }
 New-Alias version Get-PowershellVersion -Force
 New-Alias vim nvim -Force
 New-Alias vi vim -Force
+New-Alias sha Get-StringHash -Force
 
 #======================
 #=== $Env Settings ====
@@ -197,3 +198,4 @@ Write-Host 'Configuration Complete. Hello!'
 # Get-Command -Module PackageManagement # Prints available commands in the PackageManagement module
 # Get-Package -Provider Programs -IncludeWindowsInstaller # Shows everything installed
 # Get-Content -path C:\CS\Powershell\script.ps1 -raw | invoke-expression # can add an external script
+# $tracefile="$pwd\$(get-date -format 'MMddyyyy').txt" # Neat way to concat strings
