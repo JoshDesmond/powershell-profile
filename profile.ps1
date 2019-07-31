@@ -4,6 +4,14 @@ function Print-ProfileLog {
 	Write-Host $text -ForegroundColor green	
 }
 
+#======================
+#=== Machine Logic ====
+#======================
+$isWindows = ($env:OS -like "*windows*")
+$isVirtusa = ($env:COMPUTERNAME -eq "WTLJDESMOND")
+$isDesktop = ($env:COMPUTERNAME -eq "TROLOLO")
+$isLaptop = ($env:COMPUTERNAME -eq "Desktop-G1SKU")
+$isPersonal = ($isDesktop -or $isLaptop)
 
 #======================
 #====== Aliases =======
@@ -12,19 +20,19 @@ Print-ProfileLog 'Configuring Aliases'
 New-Alias ppl Print-ProfileLog -Force
 New-Alias which get-command -Force
 New-Alias npp OpenWith-NotepadPlusPlus -Force
-New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx" -Force
 Function Get-PowershellVersion { $PSVersionTable }
 New-Alias version Get-PowershellVersion -Force
 New-Alias vim nvim -Force
 New-Alias vi vim -Force
 New-Alias sha Get-StringHash -Force
+if ($isPersonal) {
+    New-Alias pc "C:\Users\$env:username\Google Drive\Percent Complete 2017.xlsx" -Force
+}
 
 #======================
 #=== $Env Settings ====
 #======================
 ppl 'Configuring Env Settings'
-$Env:Path += ";C:\Shortcuts"
-$Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
 
 # Colors:
 $colors = $host.privatedata
@@ -37,6 +45,11 @@ $colors.VerboseBackgroundColor = "DarkGray"
 $console = $host.ui.rawui
 $console.backgroundcolor = "black"
 
+# $Env:
+$Env:Path += ";C:\Shortcuts"
+if ($isVirtusa) {
+    $Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
+}
 
 #======================
 #== Import posh-git ===
@@ -47,8 +60,8 @@ Import-Module posh-git
 #======================
 #=== Import AWS-CLI ===
 #======================
-ppl 'Importing AWSPowerShell'
-Import-Module AWSPowerShell
+#ppl 'Importing AWSPowerShell'
+#Import-Module AWSPowerShell
 
 #======================
 #== Import Chocolatey =
@@ -123,6 +136,8 @@ Function Get-StringHash([String] $String, $HashName = "SHA1") {
 # Block-YouTube
 # Adds YouTube.com to the hosts file.
 Function Block-Youtube {
+    if (-Not $isWindows) { return }
+
     $hosts = 'C:\Windows\System32\drivers\etc\hosts'
 
     $is_blocked = Get-Content -Path $hosts |
@@ -137,6 +152,8 @@ Function Block-Youtube {
 # Unblock-YouTube
 # Removes any lines from the hosts file containing Youtube.com
 Function Unblock-Youtube {
+    if (-not $isWindows) { return }
+    
     $hosts = 'C:\Windows\System32\drivers\etc\hosts'
 
     $is_blocked = Get-Content -Path $hosts |
@@ -162,17 +179,32 @@ Function Get-History-All {
 	cat (Get-PSReadlineOption).HistorySavePath
 }
 
+Function Start-StartTranscript {
+    if (-not $isWindows) { break }
+	$tracefile="C:\Users\$env:username\Documents\WindowsPowerShell\Logs\PS-Session-$(get-date -format 'yyyyMMdd-HHmm').txt"
+	Start-Transcript -Path $tracefile -NoClobber
+}
+
+Function Confirm-UserApproval([String] $PromptText="Are you sure you would like to proceed") {
+	$confirmation = Read-Host $PromptText
+	if ($confirmation -eq 'y') {
+		# proceed
+	}
+}
+
 #======================
 #=Me Specific Commands=
 #======================
 ppl 'Defining Personal Functions'
 
 # Starts the IOTA Full Node running on localhost:14625
+if ($isDesktop) {
 Function Launch-IOTA {
 	java -jar C:\Git\iri\target\iri-1.4.1.4.jar -p 14265
-}
+} }
 
 # This doesn't work.
+if ($isVirtusa {
 Function Launch-VM {
 	$vbox_file = Get-Item "C:\Users\$env:username\VirtualBox VMs\CentOS 7\CentOS 7.vbox"
 	start-job {C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe -startvm $vbox_path -v}
@@ -180,17 +212,20 @@ Function Launch-VM {
 	Write-Host "ssh -p2222 admin@127.0.0.1 -v" -ForegroundColor green
 	Write-Host "You can access the PowerShell jobs with the variable $job"
 	ssh -p2222 admin@127.0.0.1 -v
-}
+}}
 
+if ($isVirtusa) {
 Function CentOSSH {
 	ssh -p2222 admin@127.0.0.1 -v
-}
+}}
 
 # Adding an external script real quick.
-get-content -path C:\Shortcuts\lunatic.ps1 -raw | invoke-expression
-
+if ($isVirtusa) {
+    get-content -path C:\Shortcuts\lunatic.ps1 -raw | invoke-expression
+}
 #======================
 #==== Finishing Up ====
+#======================
 # Clear-Host
 Write-Host 'Configuration Complete. Hello!'
 
