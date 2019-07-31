@@ -189,6 +189,13 @@ Function Start-StartTranscript {
 	Start-Transcript -Path $tracefile -NoClobber
 }
 
+Function git-whoami {
+	$gitUserName = git config user.name
+	$gitUserEmail = git config user.email
+	Write-Host "Name: ${gitUserName}, Email: ${gitUserEmail}"
+
+}
+
 # Confirm-UserApproval
 # Prompts the user with ${PromptText} text, and exits 
 Function Confirm-UserApproval([String] $PromptText="Are you sure you would like to proceed") {
