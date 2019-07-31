@@ -204,7 +204,7 @@ Function Launch-IOTA {
 } }
 
 # This doesn't work.
-if ($isVirtusa {
+if ($isVirtusa) {
 Function Launch-VM {
 	$vbox_file = Get-Item "C:\Users\$env:username\VirtualBox VMs\CentOS 7\CentOS 7.vbox"
 	start-job {C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe -startvm $vbox_path -v}
