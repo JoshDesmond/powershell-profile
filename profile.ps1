@@ -189,11 +189,12 @@ Function Start-StartTranscript {
 	Start-Transcript -Path $tracefile -NoClobber
 }
 
+# git-whoami
+# Prints to console the configured username and email in the current directory
 Function git-whoami {
 	$gitUserName = git config user.name
 	$gitUserEmail = git config user.email
 	Write-Host "Name: ${gitUserName}, Email: ${gitUserEmail}"
-
 }
 
 # Confirm-UserApproval
