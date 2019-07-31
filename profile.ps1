@@ -49,6 +49,7 @@ $console.backgroundcolor = "black"
 $Env:Path += ";C:\Shortcuts"
 if ($isVirtusa) {
     $Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
+    $Env:Path += ";C:\Users\jdesmond\Documents\NodeJS\node-v10.16.0-win-x64\"
 }
 
 #======================
