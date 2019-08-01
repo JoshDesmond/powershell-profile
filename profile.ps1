@@ -57,6 +57,9 @@ if ($isVirtusa) {
 #======================
 ppl 'Importing Posh-Git'
 Import-Module posh-git
+# Also posh-sshell
+ppl 'Importing Posh-Sshell'
+Import-Module posh-sshell
 
 #======================
 #=== Import AWS-CLI ===
@@ -255,3 +258,5 @@ Write-Host 'Configuration Complete. Hello!'
 # Get-Package -Provider Programs -IncludeWindowsInstaller # Shows everything installed
 # Get-Content -path C:\CS\Powershell\script.ps1 -raw | invoke-expression # can add an external script
 # $tracefile="$pwd\$(get-date -format 'MMddyyyy').txt" # Neat way to concat strings
+# eval $(ssh-agent -s) , ssh-add ~/.ssh/id_rsa
+# Get-Process | Sort CPU -Desc | Select -First 5
