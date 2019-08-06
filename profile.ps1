@@ -213,6 +213,13 @@ Function Confirm-UserApproval([String] $PromptText="Are you sure you would like 
 	}
 }
 
+# Measure-LastCommand
+# Outputs the amount of time it took for the last command in shell history to run
+Function Measure-LastCommand() {
+	$command = Get-History -Count 1
+	($command.EndExecutionTime - $command.StartExecutionTime) | Format-Table
+}
+
 #======================
 #=Me Specific Commands=
 #======================
