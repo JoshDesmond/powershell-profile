@@ -20,7 +20,6 @@ Print-ProfileLog 'Configuring Aliases'
 New-Alias ppl Print-ProfileLog -Force
 New-Alias which get-command -Force
 New-Alias npp OpenWith-NotepadPlusPlus -Force
-Function Get-PowershellVersion { $PSVersionTable }
 New-Alias version Get-PowershellVersion -Force
 New-Alias vim nvim -Force
 New-Alias vi vim -Force
@@ -44,12 +43,13 @@ $colors.VerboseBackgroundColor = "DarkGray"
 # Console Config:
 $console = $host.ui.rawui
 $console.backgroundcolor = "black"
+$MaximumHistoryCount = 32767
 
 # $Env:
 $Env:Path += ";C:\Shortcuts"
 if ($isVirtusa) {
 	$Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
-	$Env:Path += ";C:\Users\jdesmond\Documents\NodeJS\node-v10.16.0-win-x64\"
+	# $Env:Path += ";C:\Users\jdesmond\Documents\NodeJS\node-v10.16.0-win-x64\"
 }
 
 #======================
@@ -247,6 +247,15 @@ Function CentOSSH {
 if ($isVirtusa) {
 	get-content -path C:\Shortcuts\lunatic.ps1 -raw | invoke-expression
 }
+
+if ($isVirtusa) {
+Function chrome-debug ($cport = 9222) {
+	$chrome ="$((Get-ChildItem "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe").Directory)\Chrome.exe"
+	$ccommand = "& '$chrome' --remote-debugging-port=$cport"
+	Write-Host "Invoking $ccommand"
+	Invoke-Expression "& '$chrome' --remote-debugging-port=$cport"
+}
+}
 #======================
 #==== Finishing Up ====
 #======================
@@ -260,3 +269,14 @@ Write-Host 'Configuration Complete. Hello!'
 # $tracefile="$pwd\$(get-date -format 'MMddyyyy').txt" # Neat way to concat strings
 # eval $(ssh-agent -s) , ssh-add ~/.ssh/id_rsa
 # Get-Process | Sort CPU -Desc | Select -First 5
+# Measure-Command { npm test | Out-Default } | Out-Default is better than Out-Host if you're scripting
+# Get-History | Group {$_.StartExecutionTime.Hour} | sort Count -desc
+# https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-6
+
+# Instead Of           Use
+# ----------           ---
+# $env:USERNAME        [Environment]::UserName
+# $env:COMPUTERNAME    [Environment]::MachineName
+# `n                   [Environment]::NewLine
+# `r`n                 [Environment]::NewLine
+# $env:TEMP            [IO.Path]::GetTempDirectory()
