@@ -9,7 +9,7 @@ function Print-ProfileLog {
 #======================
 $isWindows = ($env:OS -like "*windows*")
 $isVirtusa = ($env:COMPUTERNAME -eq "WTLJDESMOND")
-$isDesktop = ($env:COMPUTERNAME -eq "TROLOLO")
+$isDesktop = ($env:COMPUTERNAME -eq "DESKTOP-TOBINO0")
 $isLaptop = ($env:COMPUTERNAME -eq "Desktop-G1SKU")
 $isPersonal = ($isDesktop -or $isLaptop)
 
@@ -61,17 +61,18 @@ if (Test-Path($ChocolateyProfile)) {
 }
 
 #======================
-#== Import posh-git ===
+#=== Import Modules ===
 #======================
 ppl 'Importing Posh-Git'
-Import-Module posh-git
-# Also posh-sshell
+if ($isDesktop) {
+Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
+} else {
+	Import-Module posh-git
+}
+
 ppl 'Importing Posh-Sshell'
 Import-Module posh-ssh
 
-#======================
-#=== Import AWS-CLI ===
-#======================
 #ppl 'Importing AWSPowerShell'
 #Import-Module AWSPowerShell
 
