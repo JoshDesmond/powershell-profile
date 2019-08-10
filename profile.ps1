@@ -49,23 +49,7 @@ $MaximumHistoryCount = 32767
 $Env:Path += ";C:\Shortcuts"
 if ($isVirtusa) {
 	$Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
-	# $Env:Path += ";C:\Users\jdesmond\Documents\NodeJS\node-v10.16.0-win-x64\"
 }
-
-#======================
-#== Import posh-git ===
-#======================
-ppl 'Importing Posh-Git'
-Import-Module posh-git
-# Also posh-sshell
-ppl 'Importing Posh-Sshell'
-Import-Module posh-sshell
-
-#======================
-#=== Import AWS-CLI ===
-#======================
-#ppl 'Importing AWSPowerShell'
-#Import-Module AWSPowerShell
 
 #======================
 #== Import Chocolatey =
@@ -75,6 +59,21 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
 	Import-Module "$ChocolateyProfile"
 }
+
+#======================
+#== Import posh-git ===
+#======================
+ppl 'Importing Posh-Git'
+Import-Module posh-git
+# Also posh-sshell
+ppl 'Importing Posh-Sshell'
+Import-Module posh-ssh
+
+#======================
+#=== Import AWS-CLI ===
+#======================
+#ppl 'Importing AWSPowerShell'
+#Import-Module AWSPowerShell
 
 #======================
 #===== Functions ====== 
