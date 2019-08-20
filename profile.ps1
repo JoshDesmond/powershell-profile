@@ -9,7 +9,7 @@ function Print-ProfileLog {
 #======================
 $isWindows = ($env:OS -like "*windows*")
 $isVirtusa = ($env:COMPUTERNAME -eq "WTLJDESMOND")
-$isDesktop = ($env:COMPUTERNAME -eq "TROLOLO")
+$isDesktop = ($env:COMPUTERNAME -eq "DESKTOP-TOBINO0")
 $isLaptop = ($env:COMPUTERNAME -eq "Desktop-G1SKU")
 $isPersonal = ($isDesktop -or $isLaptop)
 
@@ -49,23 +49,7 @@ $MaximumHistoryCount = 32767
 $Env:Path += ";C:\Shortcuts"
 if ($isVirtusa) {
 	$Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
-	# $Env:Path += ";C:\Users\jdesmond\Documents\NodeJS\node-v10.16.0-win-x64\"
 }
-
-#======================
-#== Import posh-git ===
-#======================
-ppl 'Importing Posh-Git'
-Import-Module posh-git
-# Also posh-sshell
-ppl 'Importing Posh-Sshell'
-Import-Module posh-sshell
-
-#======================
-#=== Import AWS-CLI ===
-#======================
-#ppl 'Importing AWSPowerShell'
-#Import-Module AWSPowerShell
 
 #======================
 #== Import Chocolatey =
@@ -75,6 +59,22 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
 	Import-Module "$ChocolateyProfile"
 }
+
+#======================
+#=== Import Modules ===
+#======================
+ppl 'Importing Posh-Git'
+if ($isDesktop) {
+Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
+} else {
+	Import-Module posh-git
+}
+
+ppl 'Importing Posh-Sshell'
+Import-Module posh-ssh
+
+#ppl 'Importing AWSPowerShell'
+#Import-Module AWSPowerShell
 
 #======================
 #===== Functions ====== 
