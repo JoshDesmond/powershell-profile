@@ -278,6 +278,7 @@ Write-Host 'Configuration Complete. Hello!'
 # Get-Process | Sort CPU -Desc | Select -First 5
 # Measure-Command { npm test | Out-Default } | Out-Default is better than Out-Host if you're scripting
 # Get-History | Group {$_.StartExecutionTime.Hour} | sort Count -desc
+# Get-PSDrive # outputs drives you can jump to
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-6
 
 # Instead Of           Use
