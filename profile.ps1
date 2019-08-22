@@ -270,6 +270,7 @@ Function chrome-debug ($cport = 9222) {
 Write-Host 'Configuration Complete. Hello!'
 
 # Notes and Favorited Commands:
+# dir *.cs -Recurse | sls "TODO" | select -Unique "Path" #grep
 # Get-Command -Module PackageManagement # Prints available commands in the PackageManagement module
 # Get-Package -Provider Programs -IncludeWindowsInstaller # Shows everything installed
 # Get-Content -path C:\CS\Powershell\script.ps1 -raw | invoke-expression # can add an external script
