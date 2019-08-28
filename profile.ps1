@@ -47,6 +47,10 @@ $MaximumHistoryCount = 32767
 
 # $Env:
 $Env:Path += ";C:\Shortcuts"
+if ($isDesktop) {
+	# TODO set up laptop to have same structure
+	$Env:PSModulePath += ";C:\code\powershell-modules"
+}
 if ($isVirtusa) {
 	$Env:Path += ";C:\Users\jdesmond\Documents\Neovim\bin\"
 }
@@ -220,6 +224,9 @@ Function Measure-LastCommand() {
 	($command.EndExecutionTime - $command.StartExecutionTime) | Format-Table
 }
 
+# Returns the version of powershell that is running.
+Function Get-PowershellVersion { $PSVersionTable }
+
 #======================
 #=Me Specific Commands=
 #======================
@@ -280,6 +287,7 @@ Write-Host 'Configuration Complete. Hello!'
 # Measure-Command { npm test | Out-Default } | Out-Default is better than Out-Host if you're scripting
 # Get-History | Group {$_.StartExecutionTime.Hour} | sort Count -desc
 # Get-PSDrive # outputs drives you can jump to
+# Get-NetTCPConnection | ? State -eq Established | ? RemoteAddress -notlike 127* | % { $_; Resolve-DnsName $_.RemoteAddress -type PTR -ErrorAction SilentlyContinue }
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-6
 
 # Instead Of           Use
